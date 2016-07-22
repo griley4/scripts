@@ -842,10 +842,10 @@ int main() {
   mina=minb=minc=minan=minbn=mincn=-1.0;
  // Chi2 = Chi2 + pow((datamass[1] - (0.00*scaledps*dpsmass[1] + 0.0*scalesps*spsmass[1] + 0.0*scalenlo*nlomass[1])),2)/sqrt(datamass[1]);
   std::cout<<"Scale: " <<datamass[0]<<" " << dpsmass[0]<<" "<<scaledps<<" "<<scalesps<<" "<<scalenlo<<" "<<std::endl;
-  for(float a=0.0; a<1; a=a+0.1){
-    for(float b=0.0; b<1; b=b+0.1){
-      for(float c=0.0; c<1; c=c+0.1){
-        for(int mbin=1; mbin<81; ++mbin){
+  for(float a=0.0; a<1; a=a+0.01){
+    for(float b=0.0; b<1; b=b+0.01){
+      for(float c=0.0; c<1; c=c+0.01){
+        for(int mbin=8; mbin<81; ++mbin){
           if (datamass[mbin]<1){
             Chi2 = Chi2 + pow((datamass[mbin] - (a*scaledps*dpsmass[mbin] + b*scalesps*spsmass[mbin] + c*scalenlo*nlomass[mbin])),2)/sqrt(1.6);
 //            std::cout<<Chi2<<std::endl;
@@ -880,12 +880,12 @@ int main() {
         }
       //std::cout<<"a, b, c: "<<a<<" "<<b<<" "<<c<<" Chi2: "<<Chi2<<std::endl;
       //std::cin.ignore();
-      if (Chi2<minchi2norm){
-        if ( a+b+c==1){
+      if (Chi2<=minchi2norm){
+        if ( 1-(a+b+c)<0.01){
           minchi2norm=Chi2; minan = a; minbn = b; mincn = c;
         }
       }
-      if (Chi2<minchi2){
+      if (Chi2<=minchi2){
           minchi2=Chi2; mina = a; minb = b; minc = c;
       }
       std::cout<<a<<" "<<b<<" "<<c<<" "<<Chi2<<std::endl;
